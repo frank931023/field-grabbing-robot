@@ -86,8 +86,12 @@ def click_next_button():
 def appointment():
     # Go to badminton page
     try:
+        # reservation_button = WebDriverWait(driver, 10).until(
+        #     EC.element_to_be_clickable((By.XPATH, "/html/body/div[2]/section/div[3]/div/div[2]/div/div[1]/div[2]/div/div[2]/div[2]/div/div/div/div[2]/div[2]/span[2]/a"))
+        # )
+
         reservation_button = WebDriverWait(driver, 10).until(
-            EC.element_to_be_clickable((By.XPATH, "/html/body/div[2]/section/div[3]/div/div[2]/div/div[1]/div[2]/div/div[2]/div[2]/div/div/div/div[2]/div[2]/span[2]/a"))
+            EC.element_to_be_clickable((By.XPATH, "/html/body/div[2]/section/div[3]/div/div[2]/div/div[1]/div[2]/div/div[3]/div[2]/div/div[1]/div/div[2]/div[2]/span[2]/a"))
         )
         reservation_button.click()
 
@@ -96,7 +100,7 @@ def appointment():
 
     # Select court
     try:
-        court_name = "羽球場10(依仁堂籃球館)"
+        court_name = "室內籃球場A"
         court_item = WebDriverWait(driver, 10).until(
             EC.visibility_of_element_located((By.XPATH, f"//h6[text()='{court_name}']/.."))
         )
@@ -128,21 +132,53 @@ def appointment():
 
     # Select time
     try:
-        time_str = "09:00"
-        # 查找包含指定時間的元素
-        time_element = WebDriverWait(driver, 10).until(
-            EC.visibility_of_element_located((By.XPATH, f"//div[@class='stime' and text()='{time_str}']"))
-        )
-        print(f"找到時間: {time_str}")
+        time_str = " 09:00 "
 
-        # 找到對應的選擇按鈕
-        # select_button = time_element.find_element(By.XPATH, "./ancestor::div[@class='select_time']//a[contains(@class, 'select_time_in')]")
-        select_button = WebDriverWait(driver, 10).until(
-            EC.element_to_be_clickable((By.XPATH, f"//div[@class='stime' and text()='{time_str}']//ancestor::div[@class='select_time']//a[contains(@class, 'select_time_in')]"))
+        # 滾動頁面確保所有元素加載
+        # print("滾動頁面以確保所有時間都加載...")
+        # driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+        # time.sleep(2)
+        # driver.execute_script("window.scrollTo(0, 0);")
+
+        # 使用 XPath 查找時間，並找到對應的選擇按鈕
+
+        table = WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.CLASS_NAME, "service-flow"))
         )
-        select_button.click()  # 點擊"選擇"按鈕
-        print(f"點擊了時間 {time_str} 的選擇按鈕。")
-        time.sleep(5)
+        print("D")
+        # small_table = WebDriverWait(table, 10).until(
+        #     EC.presence_of_element_located((By.XPATH, "//div[@class='pt_datetime']"))
+        # )
+        small_table = WebDriverWait(table, 10).until(
+            EC.presence_of_element_located((By.CLASS_NAME, "pt_datetime"))
+        )
+        print("E")
+        # 查找所有的時間元素，避免單一查找出錯
+        time_elements = small_table.find_elements(By.CLASS_NAME, "stime")
+        print(f"找到 {len(time_elements)} 個時間元素")
+        print("F")
+        for time_element in time_elements:
+            print(time_element.text.strip())
+
+        # 遍歷找到具體時間 09:00 的元素
+        # for time_element in time_elements:
+        #     if time_element.text.strip() == "09:00":
+        #         print("找到時間: 09:00")
+        #         # 找到對應的選擇按鈕並點擊
+        #         select_button = time_element.find_element(By.XPATH, "./following-sibling::a")
+        #         select_button.click()
+        #         print("成功點擊 09:00 的選擇按鈕")
+        #         break
+        # time_element = WebDriverWait(small_table, 10).until(
+        #     EC.presence_of_element_located((By.XPATH, f"//div[@class='stime' and text()='09:00']"))
+        # )
+        # print("C")
+        # select_button = time_element.find_element(By.XPATH, "./following-sibling::a")
+        # print("A")
+        # select_button.click()  # 點擊 "選擇" 按鈕
+        # print("B")
+        # time.sleep(5)
+
     except Exception as e:
         print(f"選擇時間時發生錯誤: {e}")
 
