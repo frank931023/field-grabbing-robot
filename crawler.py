@@ -30,7 +30,7 @@ def login():
             EC.visibility_of_element_located((By.CSS_SELECTOR, "input.st-mb-0.st-text-black.st-p-3.st-w-full.st-border-none.st-bg-transparent"))
         )
         gmail_input.clear()
-        gmail_input.send_keys("frank931023@gmail.com")
+        gmail_input.send_keys("weihong609193@gmail.com")
 
         next_button = WebDriverWait(driver, 10).until(
             EC.element_to_be_clickable((By.XPATH, "//button[contains(@class, 'st-bg-primary') and contains(., '下一步')]"))
@@ -47,7 +47,7 @@ def login():
         )
 
         password_input.clear()
-        password_input.send_keys("X10739y31248")  
+        password_input.send_keys("Hong609193")  
 
         login_button = WebDriverWait(driver, 10).until(
             EC.element_to_be_clickable((By.XPATH, "//button[contains(@class, 'st-bg-primary') and contains(., '登入')]"))
@@ -86,13 +86,21 @@ def click_next_button():
 def appointment():
     # Go to badminton page
     try:
+        reservation_button = WebDriverWait(driver, 10).until(
+    EC.element_to_be_clickable((By.XPATH, "//a[contains(@class, 'btn--black') and text()='預約']"))
+)
+
+
+
+        # 羽球
         # reservation_button = WebDriverWait(driver, 10).until(
         #     EC.element_to_be_clickable((By.XPATH, "/html/body/div[2]/section/div[3]/div/div[2]/div/div[1]/div[2]/div/div[2]/div[2]/div/div/div/div[2]/div[2]/span[2]/a"))
         # )
 
-        reservation_button = WebDriverWait(driver, 10).until(
-            EC.element_to_be_clickable((By.XPATH, "/html/body/div[2]/section/div[3]/div/div[2]/div/div[1]/div[2]/div/div[3]/div[2]/div/div[1]/div/div[2]/div[2]/span[2]/a"))
-        )
+        # 籃球
+        # reservation_button = WebDriverWait(driver, 10).until(
+        #     EC.element_to_be_clickable((By.XPATH, "/html/body/div[2]/section/div[3]/div/div[2]/div/div[1]/div[2]/div/div[3]/div[2]/div/div[1]/div/div[2]/div[2]/span[2]/a"))
+        # )
         reservation_button.click()
 
     except Exception as e:
@@ -100,7 +108,7 @@ def appointment():
 
     # Select court
     try:
-        court_name = "室內籃球場A"
+        court_name = "桌球場03"
         court_item = WebDriverWait(driver, 10).until(
             EC.visibility_of_element_located((By.XPATH, f"//h6[text()='{court_name}']/.."))
         )
@@ -117,7 +125,7 @@ def appointment():
     # Select date
     while True:
         try:
-            date_str = "10/12"
+            date_str = "10/16"
             # 查找特定日期的按鈕
             date_button = WebDriverWait(driver, 2).until(
                 EC.element_to_be_clickable((By.XPATH,  f"//div[@data-date='2024/{date_str}']"))
@@ -134,11 +142,11 @@ def appointment():
     try:
         time_str = " 09:00 "
 
-        # 滾動頁面確保所有元素加載
-        # print("滾動頁面以確保所有時間都加載...")
-        # driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-        # time.sleep(2)
-        # driver.execute_script("window.scrollTo(0, 0);")
+        #滾動頁面確保所有元素加載
+        print("滾動頁面以確保所有時間都加載...")
+        driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+        #time.sleep(2)
+        driver.execute_script("window.scrollTo(0, 0);") 
 
         # 使用 XPath 查找時間，並找到對應的選擇按鈕
 
@@ -155,20 +163,26 @@ def appointment():
         print("E")
         # 查找所有的時間元素，避免單一查找出錯
         time_elements = small_table.find_elements(By.CLASS_NAME, "stime")
-        print(f"找到 {len(time_elements)} 個時間元素")
+        print("找到 {len(time_elements)} 個時間元素")
         print("F")
         for time_element in time_elements:
             print(time_element.text.strip())
 
-        # 遍歷找到具體時間 09:00 的元素
-        # for time_element in time_elements:
-        #     if time_element.text.strip() == "09:00":
-        #         print("找到時間: 09:00")
-        #         # 找到對應的選擇按鈕並點擊
-        #         select_button = time_element.find_element(By.XPATH, "./following-sibling::a")
-        #         select_button.click()
-        #         print("成功點擊 09:00 的選擇按鈕")
-        #         break
+        #遍歷找到具體時間 09:00 的元素
+        for time_element in time_elements:
+            if time_element.text.strip() == "09:00":
+                print("找到時間: 09:00")
+                # 找到對應的選擇按鈕並點擊
+                select_button = time_element.find_element(By.XPATH, "./following-sibling::a")
+                select_button.click()
+                print("成功點擊 09:00 的選擇按鈕")
+                break
+
+        select_button = time_element.find_element(By.XPATH, "./following-sibling::a[contains(@class, 'booking-btn primary-business-color-background')]")
+    
+    # 點擊確認按鈕
+        confirm_button.click()
+        print("成功點擊確認預約按鈕")
         # time_element = WebDriverWait(small_table, 10).until(
         #     EC.presence_of_element_located((By.XPATH, f"//div[@class='stime' and text()='09:00']"))
         # )
@@ -183,8 +197,45 @@ def appointment():
         print(f"選擇時間時發生錯誤: {e}")
 
 
+# Confirm appointment
+def confirm_appointment():
+    try:
+        # Wait for the confirm button to be clickable
+        confirm_button = WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable((By.XPATH, "//div[contains(@class, 'booking-btn') and contains(@class, 'primary-business-color-background') and text()='確認預約']"))
+        )
+        
+        # Scroll the button into view
+        driver.execute_script("arguments[0].scrollIntoView(true);", confirm_button)
+        
+        # Wait a short time for any animations to complete
+        time.sleep(1)
+        
+        # Click the button
+        confirm_button.click()
+        print("確認預約成功。")
+        
+        # Wait for confirmation or next page to load
+        WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.XPATH, "//div[contains(text(), '預約成功') or contains(text(), '預約確認')]"))
+        )
+        print("預約已確認完成。")
+        
+    except Exception as e:
+        print(f"確認預約失敗: {e}")
 
-# start the process
-login()
-appointment()
+# Main execution
+def main():
+    try:
+        login()
+        appointment()
+        confirm_appointment()
+    except Exception as e:
+        print(f"執行過程中發生錯誤: {e}")
+    finally:
+        # Optionally, add a wait here to keep the browser open for a while
+        # time.sleep(10)
+        driver.quit()
 
+if __name__ == "__main__":
+    main()
