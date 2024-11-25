@@ -1,0 +1,119 @@
+/* 全局設置 */
+body {
+  font-family: "Roboto", Arial, sans-serif;
+  background-color: #0b1d39; /* 深藍色背景 */
+  margin: 0;
+  padding: 0;
+  color: #ffffff; /* 字體顏色為白色 */
+  overflow-x: hidden; /* 防止水平滾動條 */
+}
+
+/* 頁面容器 */
+.container {
+  width: 90%;
+  max-width: 600px;
+  margin: 50px auto;
+  background: linear-gradient(135deg, #1f3b6e, #0b1d39); /* 漸層背景 */
+  padding: 20px 30px;
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5); /* 深色陰影 */
+  animation: fadeIn 1.5s ease-in-out; /* 加入進場動畫 */
+}
+
+/* 標題 */
+h1 {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #ffcc00; /* 金黃色標題 */
+  text-shadow: 0 4px 6px rgba(255, 204, 0, 0.5); /* 金黃色的光暈 */
+}
+
+/* 表單標籤 */
+label {
+  display: block;
+  margin: 15px 0 5px;
+  color: #aad4ff; /* 輕淡的藍色文字 */
+  font-size: 1.1rem;
+}
+
+/* 表單元素樣式 */
+select,
+input[type="date"],
+button {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  background: #ffffff; /* 白色背景 */
+  color: #0b1d39; /* 深藍文字 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 輕微陰影 */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+select:hover,
+input[type="date"]:hover,
+button:hover {
+  transform: scale(1.03); /* 放大效果 */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4); /* 更大的陰影 */
+}
+
+button {
+  background: linear-gradient(45deg, #007bff, #0056b3); /* 漸層深藍按鈕 */
+  color: #ffffff; /* 白色文字 */
+  cursor: pointer;
+}
+
+button:hover {
+  background: linear-gradient(45deg, #ffcc00, #ff9900); /* 按下時金黃色效果 */
+}
+
+/* 時間多選框容器 */
+#time {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center; /* 時間選項置中 */
+}
+
+/* 時間標籤 */
+#time label {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  padding: 5px 10px;
+  background: #1f3b6e; /* 深藍背景 */
+  color: #aad4ff; /* 輕藍文字 */
+  border: 2px solid #aad4ff; /* 淺藍邊框 */
+  border-radius: 10px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+#time label:hover {
+  background: #ffcc00; /* 滑過變成金黃色 */
+  color: #0b1d39; /* 滑過時文字變深藍 */
+  transform: scale(1.1); /* 放大效果 */
+}
+
+/* 時間多選框 */
+#time input[type="checkbox"] {
+  margin-right: 8px;
+  accent-color: #ffcc00; /* 調整選框顏色為金黃色 */
+}
+
+/* 動畫效果 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

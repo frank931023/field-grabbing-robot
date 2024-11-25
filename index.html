@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>運動場地預約</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>17fit.com <br>運動場地與時間預約系統</h1>
+        <form id="reservationForm">
+            <!-- 日期選擇 -->
+            <label for="date">選擇日期：</label>
+            <input type="date" id="date" required>
+
+            <!-- 運動選擇 -->
+            <label for="sport">選擇運動：</label>
+            <select id="sport" required>
+                <option value="">請選擇運動</option>
+                <option value="籃球">籃球</option>
+                <option value="羽球">羽球</option>
+                <option value="排球">排球</option>
+                <option value="桌球">桌球</option>
+                <option value="網球">網球</option>
+            </select>
+
+            <!-- 場地選擇 -->
+            <label for="location">選擇場地：</label>
+            <select id="location" required>
+                <option value="">請先選擇運動</option>
+            </select>
+
+            <!-- 時間選擇 -->
+            <label for="time">選擇時間：</label>
+            <div id="time">
+                <!-- JavaScript 生成多選時間 -->
+            </div>
+
+            <!-- 確認按鈕 -->
+            <button type="button" id="confirmButton">確認預約</button>
+        </form>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

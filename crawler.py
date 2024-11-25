@@ -98,9 +98,9 @@ def appointment():
         # )
 
         # 籃球
-        # reservation_button = WebDriverWait(driver, 10).until(
-        #     EC.element_to_be_clickable((By.XPATH, "/html/body/div[2]/section/div[3]/div/div[2]/div/div[1]/div[2]/div/div[3]/div[2]/div/div[1]/div/div[2]/div[2]/span[2]/a"))
-        # )
+        reservation_button = WebDriverWait(driver, 10).until(
+            EC.element_to_be_clickable((By.XPATH, "/html/body/div[2]/section/div[3]/div/div[2]/div/div[1]/div[2]/div/div[3]/div[2]/div/div[1]/div/div[2]/div[2]/span[2]/a"))
+        )
         reservation_button.click()
 
     except Exception as e:
@@ -108,7 +108,7 @@ def appointment():
 
     # Select court
     try:
-        court_name = "桌球場03"
+        court_name = "室內籃球場A"
         court_item = WebDriverWait(driver, 10).until(
             EC.visibility_of_element_located((By.XPATH, f"//h6[text()='{court_name}']/.."))
         )
@@ -125,7 +125,7 @@ def appointment():
     # Select date
     while True:
         try:
-            date_str = "10/16"
+            date_str = "11/27"
             # 查找特定日期的按鈕
             date_button = WebDriverWait(driver, 2).until(
                 EC.element_to_be_clickable((By.XPATH,  f"//div[@data-date='2024/{date_str}']"))
@@ -140,7 +140,7 @@ def appointment():
 
     # Select time
     try:
-        time_str = " 09:00 "
+        time_str = " 12:00 "
 
         #滾動頁面確保所有元素加載
         print("滾動頁面以確保所有時間都加載...")
@@ -239,3 +239,16 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+# 我要建立一個網頁用來選擇場地和時間，需要這些欄位
+# 1. 日期 
+# 2. 時間 (9:00-22:00) 每一小時為單位 可以複選時間
+# 3. 運動 (籃球、羽球、排球、桌球、網球)
+# 4. 會按照不同運動給不同地點 (室內籃球場A、室內籃球場B、室內羽球場A、室內羽球場B、室內排球場A、室內排球場B、室內桌球場A、室內桌球場B、室內網球場A、室內網球場B) 
+# 最後要有一個確認按鈕，按下後會跳出alert顯示預約成功的訊息。
+# 然後要將剛剛選擇的內容都移除，讓下一個人可以選擇。
+
+# 給我html css js檔案
+
+
+
