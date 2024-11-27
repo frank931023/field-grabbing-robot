@@ -22,7 +22,7 @@ def login(driver):
             EC.visibility_of_element_located((By.CSS_SELECTOR, "input.st-mb-0.st-text-black.st-p-3.st-w-full.st-border-none.st-bg-transparent"))
         )
         gmail_input.clear()
-        gmail_input.send_keys("weihong609193@gmail.com")
+        gmail_input.send_keys("frank931023@gmail.com")
 
         next_button = WebDriverWait(driver, 2).until(
             EC.element_to_be_clickable((By.XPATH, "//button[contains(@class, 'st-bg-primary') and contains(., '下一步')]"))
@@ -34,7 +34,7 @@ def login(driver):
             EC.visibility_of_element_located((By.CSS_SELECTOR, "input[type='password']"))
         )
         password_input.clear()
-        password_input.send_keys("Hong609193")  
+        password_input.send_keys("x10739y31248")  
 
         login_button = WebDriverWait(driver, 2).until(
             EC.element_to_be_clickable((By.XPATH, "//button[contains(@class, 'st-bg-primary') and contains(., '登入')]"))
